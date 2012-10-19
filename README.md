@@ -39,15 +39,16 @@ Create the file `~/.fssh` that will contain your fssh config in YAML format.  Mi
 ## Usage
 
 SSH to and (optionally) run a command on a remote ec2 server:
+
 `fssh server_name [command]`
 
 Securely copy a file from a remote ec2 server to your local machine:
+
 `fscp remote_path local_path`
 
-Securely copy a file from your local machine to a remote ec2 server:
-`fscp local_path remote_path --up`
+Securely copy a file from your local machine to a remote ec2 server. Keep in mind that the `fscp` command does not use the same `host:/path/` syntax that the `scp` command uses:
 
-Keep in mind that the `fscp` command does not use the same `host:/path/` syntax that the `scp` command uses.
+`fscp local_path remote_path --up`
 
 ## Requirements
 
