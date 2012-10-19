@@ -42,13 +42,10 @@ SSH to and (optionally) run a command on a remote ec2 server:
 
 `fssh server_name [command]`
 
-Securely copy a file from a remote ec2 server to your local machine:
+Securely copy a file from a remote ec2 server to your local machine or vice-versa. For the most part, the `fscp` command uses the same `host:/path/` syntax that the `scp` command uses:
 
-`fscp remote_path local_path`
-
-Securely copy a file from your local machine to a remote ec2 server. Keep in mind that the `fscp` command does not use the same `host:/path/` syntax that the `scp` command uses:
-
-`fscp local_path remote_path --up`
+`fscp server_name:/remote_path local_path`
+`fscp local_path, server_name:/remote_path`
 
 ## Requirements
 
