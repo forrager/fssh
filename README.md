@@ -45,11 +45,12 @@ SSH to and (optionally) run a command on a remote ec2 server:
 Securely copy a file from a remote ec2 server to your local machine or vice-versa. For the most part, the `fscp` command uses the same `host:/path/` syntax that the `scp` command uses:
 
 `fscp server_name:/remote_path local_path`
+
 `fscp local_path, server_name:/remote_path`
 
 ## Requirements
 
-The fssh gem assumes you have OpenSSH (or some variant) installed and that you're running some *nix-based operating system like Linux or Mac OS.
+The fssh gem assumes you have OpenSSH (or some variant) installed and that you're running some *nix-based operating system like Linux or Mac OS.  The `fscp` command also relies on the existence of netcat.
 
 ## Running Tests
 
