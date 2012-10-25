@@ -3,7 +3,7 @@
 # Copyright 2012 Forrager
 # http://www.apache.org/licenses/LICENSE-2.0
 
-require 'aws'
+require 'AWS'
 require 'yaml'
 
 module FSSH
