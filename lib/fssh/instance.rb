@@ -20,5 +20,10 @@ module FSSH
     def private_dns_name
       base.instancesSet.item.first.privateDnsName
     end
+
+    def name
+      results = base.instancesSet.item.first.tagSet.item.select { |hash| hash["key"] == "Name" }
+      results.size > 0 ? results.first["value"] : ""
+    end
   end
 end

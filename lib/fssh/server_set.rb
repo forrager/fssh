@@ -35,6 +35,10 @@ module FSSH
       @instances.map { |instance| instance.instancesSet.item.first.dnsName }
     end
 
+    def private_dns_names
+      @instances.map { |instance| instance.instancesSet.item.first.privateDnsName }
+    end
+
     def first
       Instance.new(@instances.first)
     end
