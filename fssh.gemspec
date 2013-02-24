@@ -26,4 +26,5 @@ Gem::Specification.new do |s|
   s.files = Dir["{lib}/**/*", "Gemfile", "History.txt", "LICENSE", "README.md", "Rakefile", "fssh.gemspec"]
   s.executables << "fssh"
   s.executables << "fscp"
+  s.executables << "ftunnel"
 end

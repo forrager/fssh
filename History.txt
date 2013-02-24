@@ -1,3 +1,7 @@
+=== 1.0.0
+
+* Add ftunnel (SSH tunnel) support.
+
 === 0.0.2
 
 * Fix AWS gem require.

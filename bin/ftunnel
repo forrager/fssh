@@ -1,0 +1,59 @@
+#! /usr/bin/env ruby
+
+# encoding: UTF-8
+
+# Copyright 2012 Forrager
+# http://www.apache.org/licenses/LICENSE-2.0
+
+require 'rubygems' unless ENV["NO_RUBYGEMS"]
+require 'fssh'
+
+if ARGV.size >= 2
+  cli = FSSH::CLI.new(ARGV[0])
+else
+  puts "ftunnel must be given the name of the server to connect to as well as a remote and local port, eg: ftunnel my_awesome_server 4444:22"
+  puts "USAGE: ftunnel ec2_instance_name local_port:remote_port"
+  exit 1
+end
+
+local_port, remote_port = ARGV[1].include?(":") ? ARGV[1].split(":") : [ARGV[1], ARGV[1]]
+use_sudo = ARGV[2] == "--sudo"
+
+unless cli.private_key_exists?
+  puts "Could not find #{cli.config.local_private_key_file}"
+  exit 1
+end
+
+puts " * Finding instances ..."
+cli.find_instances
+
+if cli.find_gateway
+  puts " * Found gateway"
+end
+
+if cli.find_server
+  puts " * Found #{cli.server_name}"
+else
+  puts " * Couldn't find server with name #{cli.server_name}"
+  exit 1
+end
+
+hops = cli.hops
+
+if hops.size <= 1
+  puts " * Unable to establish tunnel without two hosts."
+elsif hops.size > 2
+  puts " * Tunneling through more than one host is not currently supported."
+else
+  command = "#{use_sudo ? "sudo " : ""}ssh -i #{cli.config.local_private_key_file} -N -f -L#{local_port}:#{hops.last.dns_name}:#{remote_port} -l #{cli.config.username} #{hops.first.dns_name}"
+end
+
+puts " * Executing: #{command}"
+system command
+
+if $?.exitstatus == 0
+  puts " * Tunnel started."
+else
+  puts " * Tunnel failed."
+  puts " * Are you trying to forward a privileged port?  Try using the --sudo option."
+end

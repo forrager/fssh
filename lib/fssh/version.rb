@@ -4,5 +4,5 @@
 # http://www.apache.org/licenses/LICENSE-2.0
 
 module FSSH
-  VERSION = "0.0.3"
+  VERSION = "1.0.0"
 end
